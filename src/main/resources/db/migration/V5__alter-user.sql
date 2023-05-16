@@ -1,0 +1,1 @@
+ALTER TABLE user ADD nombre VARCHAR(25);
