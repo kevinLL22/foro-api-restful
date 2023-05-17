@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 @Table(name = "answer", schema = "foro_restful")
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
 public class AnswerEntity {

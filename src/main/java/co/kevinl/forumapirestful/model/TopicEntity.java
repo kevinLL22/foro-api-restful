@@ -10,7 +10,7 @@ import java.util.Collection;
 @Table(name = "topic", schema = "foro_restful")
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
 public class TopicEntity {
