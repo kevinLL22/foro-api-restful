@@ -76,4 +76,8 @@ public class TopicService {
             throw new RuntimeException("Topic not found");
         }
     }
+
+    public void deleteTopicById(Long id){
+        topicRepository.deleteById(id);
+    }
 }

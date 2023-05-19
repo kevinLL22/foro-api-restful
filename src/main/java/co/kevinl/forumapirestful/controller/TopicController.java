@@ -53,4 +53,10 @@ public class TopicController {
         return ResponseEntity.ok(dataTopicResponse);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteTopic(@PathVariable Long id){
+        topicService.deleteTopicById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
