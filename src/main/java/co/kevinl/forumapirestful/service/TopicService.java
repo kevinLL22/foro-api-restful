@@ -10,6 +10,7 @@ import co.kevinl.forumapirestful.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,4 +55,9 @@ public class TopicService {
             throw new RuntimeException("Topic not found");
         }
     }
+
+    public List<TopicEntity> returnAll(){
+        return topicRepository.findAll();
+    }
+
 }

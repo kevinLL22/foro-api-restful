@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/topic")
@@ -36,6 +37,12 @@ public class TopicController {
         TopicEntity topicEntity = topicService.returnById(id);
         DataTopicResponse dataTopicResponse = new DataTopicResponse(topicEntity);
         return ResponseEntity.ok(dataTopicResponse);
+    }
+
+    //todo add pageable
+    @GetMapping
+    public List<DataTopicResponse> returnAllTopics(){
+        return topicService.returnAll().stream().map(DataTopicResponse::new).toList();
     }
 
 }
