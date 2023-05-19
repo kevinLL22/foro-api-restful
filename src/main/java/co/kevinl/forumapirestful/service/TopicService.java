@@ -1,5 +1,6 @@
 package co.kevinl.forumapirestful.service;
 
+import co.kevinl.forumapirestful.dto.DataEditTopic;
 import co.kevinl.forumapirestful.dto.DataNewTopic;
 import co.kevinl.forumapirestful.model.CourseEntity;
 import co.kevinl.forumapirestful.model.TopicEntity;
@@ -60,4 +61,19 @@ public class TopicService {
         return topicRepository.findAll();
     }
 
+    public TopicEntity editTopic(DataEditTopic dataEditTopic){
+        Optional<TopicEntity> optionalTopic = topicRepository.findById(dataEditTopic.id());
+
+        if (optionalTopic.isPresent()){
+            TopicEntity topicEntity = optionalTopic.get();
+
+            //adding new data
+            topicEntity.setTitle(dataEditTopic.title());
+            topicEntity.setMessage(dataEditTopic.message());
+            topicRepository.save(topicEntity);
+            return topicEntity;
+        } else {
+            throw new RuntimeException("Topic not found");
+        }
+    }
 }

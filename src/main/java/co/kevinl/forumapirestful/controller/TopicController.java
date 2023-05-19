@@ -1,5 +1,6 @@
 package co.kevinl.forumapirestful.controller;
 
+import co.kevinl.forumapirestful.dto.DataEditTopic;
 import co.kevinl.forumapirestful.dto.DataNewTopic;
 import co.kevinl.forumapirestful.dto.DataTopicResponse;
 import co.kevinl.forumapirestful.model.TopicEntity;
@@ -43,6 +44,13 @@ public class TopicController {
     @GetMapping
     public List<DataTopicResponse> returnAllTopics(){
         return topicService.returnAll().stream().map(DataTopicResponse::new).toList();
+    }
+
+    @PutMapping
+    public ResponseEntity<DataTopicResponse> returnTopicEdited(@RequestBody @Valid DataEditTopic dataEditTopic){
+        TopicEntity topicEntity = topicService.editTopic(dataEditTopic);
+        DataTopicResponse dataTopicResponse = new DataTopicResponse(topicEntity);
+        return ResponseEntity.ok(dataTopicResponse);
     }
 
 }
