@@ -5,9 +5,7 @@ import co.kevinl.forumapirestful.dto.DataNewCourse;
 import co.kevinl.forumapirestful.model.CourseEntity;
 import co.kevinl.forumapirestful.service.CourseService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -29,5 +27,14 @@ public class CourseController {
         URI uri = builder.path("/course/{id}").buildAndExpand(courseEntity.getId()).toUri();
 
         return ResponseEntity.created(uri).body(dataCourseResponse);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DataCourseResponse> GetCourseById (@PathVariable Long id){
+        CourseEntity courseEntity = courseService.findById(id);
+
+        DataCourseResponse dataCourseResponse = new DataCourseResponse(courseEntity);
+
+        return ResponseEntity.ok(dataCourseResponse);
     }
 }

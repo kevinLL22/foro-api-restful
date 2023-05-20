@@ -5,6 +5,8 @@ import co.kevinl.forumapirestful.model.CourseEntity;
 import co.kevinl.forumapirestful.repository.CourseRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CourseService {
 
@@ -23,5 +25,15 @@ public class CourseService {
         courseRepository.save(courseEntity);
 
         return courseEntity;
+    }
+
+    public CourseEntity findById(Long id){
+        Optional<CourseEntity> optionalCourse = courseRepository.findById(id);
+        if (optionalCourse.isPresent()){
+            return optionalCourse.get();
+        }
+        else {
+            throw new RuntimeException("Course not found");
+        }
     }
 }
