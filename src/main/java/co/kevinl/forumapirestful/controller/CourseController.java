@@ -38,4 +38,12 @@ public class CourseController {
 
         return ResponseEntity.ok(dataCourseResponse);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<DataCourseResponse> DeleteCourseById (@PathVariable Long id){
+        courseService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

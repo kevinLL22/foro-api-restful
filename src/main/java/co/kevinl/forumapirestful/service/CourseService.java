@@ -36,4 +36,8 @@ public class CourseService {
             throw new RuntimeException("Course not found");
         }
     }
+
+    public void deleteById(Long id){
+        courseRepository.deleteById(id);
+    }
 }
