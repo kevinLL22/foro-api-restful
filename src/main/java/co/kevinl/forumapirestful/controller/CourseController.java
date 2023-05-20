@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/course")
@@ -37,6 +38,12 @@ public class CourseController {
         DataCourseResponse dataCourseResponse = new DataCourseResponse(courseEntity);
 
         return ResponseEntity.ok(dataCourseResponse);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<DataCourseResponse>> getAllCourses(){
+        List<DataCourseResponse> responseList = courseService.findAll().stream().map(DataCourseResponse::new).toList();
+        return ResponseEntity.ok(responseList);
     }
 
     @DeleteMapping("/{id}")
