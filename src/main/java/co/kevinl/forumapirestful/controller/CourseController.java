@@ -1,6 +1,7 @@
 package co.kevinl.forumapirestful.controller;
 
 import co.kevinl.forumapirestful.dto.DataCourseResponse;
+import co.kevinl.forumapirestful.dto.DataEditCourse;
 import co.kevinl.forumapirestful.dto.DataNewCourse;
 import co.kevinl.forumapirestful.model.CourseEntity;
 import co.kevinl.forumapirestful.service.CourseService;
@@ -50,6 +51,14 @@ public class CourseController {
     public ResponseEntity<DataCourseResponse> DeleteCourseById (@PathVariable Long id){
         courseService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<DataCourseResponse> EditCourse(@RequestBody @Valid DataEditCourse dataEditCourse){
+        CourseEntity courseEntity = courseService.editCourse(dataEditCourse);
+        DataCourseResponse dataCourseResponse = new DataCourseResponse(courseEntity);
+
+        return ResponseEntity.ok(dataCourseResponse);
     }
 
 

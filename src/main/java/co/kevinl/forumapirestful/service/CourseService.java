@@ -1,5 +1,6 @@
 package co.kevinl.forumapirestful.service;
 
+import co.kevinl.forumapirestful.dto.DataEditCourse;
 import co.kevinl.forumapirestful.dto.DataNewCourse;
 import co.kevinl.forumapirestful.model.CourseEntity;
 import co.kevinl.forumapirestful.repository.CourseRepository;
@@ -44,5 +45,21 @@ public class CourseService {
 
     public void deleteById(Long id){
         courseRepository.deleteById(id);
+    }
+
+    public CourseEntity editCourse(DataEditCourse editCourse){
+
+        Optional<CourseEntity> optionalCourse = courseRepository.findById(editCourse.id());
+        if (optionalCourse.isPresent()){
+            CourseEntity courseEntity = optionalCourse.get();
+            courseEntity.setName(editCourse.name());
+            courseEntity.setCategory(editCourse.category());
+            courseRepository.save(courseEntity);
+            return courseEntity;
+        }
+        else {
+            throw new RuntimeException("Course not found");
+        }
+
     }
 }
