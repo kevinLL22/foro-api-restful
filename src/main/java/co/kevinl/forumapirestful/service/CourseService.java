@@ -7,7 +7,7 @@ import co.kevinl.forumapirestful.repository.CourseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class CourseService {
@@ -34,13 +34,9 @@ public class CourseService {
     }
 
     public CourseEntity findById(Long id){
-        Optional<CourseEntity> optionalCourse = courseRepository.findById(id);
-        if (optionalCourse.isPresent()){
-            return optionalCourse.get();
-        }
-        else {
-            throw new RuntimeException("Course not found");
-        }
+
+        return courseRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
     }
 
     public void deleteById(Long id){
@@ -49,17 +45,13 @@ public class CourseService {
 
     public CourseEntity editCourse(DataEditCourse editCourse){
 
-        Optional<CourseEntity> optionalCourse = courseRepository.findById(editCourse.id());
-        if (optionalCourse.isPresent()){
-            CourseEntity courseEntity = optionalCourse.get();
-            courseEntity.setName(editCourse.name());
-            courseEntity.setCategory(editCourse.category());
-            courseRepository.save(courseEntity);
-            return courseEntity;
-        }
-        else {
-            throw new RuntimeException("Course not found");
-        }
+        CourseEntity courseEntity = courseRepository.findById(editCourse.id())
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+
+        courseEntity.setName(editCourse.name());
+        courseEntity.setCategory(editCourse.category());
+        courseRepository.save(courseEntity);
+        return courseEntity;
 
     }
 }
