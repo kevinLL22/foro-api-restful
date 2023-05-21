@@ -1,8 +1,8 @@
 package co.kevinl.forumapirestful.controller;
 
-import co.kevinl.forumapirestful.dto.DataCourseResponse;
-import co.kevinl.forumapirestful.dto.DataEditCourse;
-import co.kevinl.forumapirestful.dto.DataNewCourse;
+import co.kevinl.forumapirestful.dto.course.DataCourseResponse;
+import co.kevinl.forumapirestful.dto.course.DataEditCourse;
+import co.kevinl.forumapirestful.dto.course.DataNewCourse;
 import co.kevinl.forumapirestful.model.CourseEntity;
 import co.kevinl.forumapirestful.service.CourseService;
 import jakarta.validation.Valid;

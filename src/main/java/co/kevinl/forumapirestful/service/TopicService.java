@@ -1,7 +1,7 @@
 package co.kevinl.forumapirestful.service;
 
-import co.kevinl.forumapirestful.dto.DataEditTopic;
-import co.kevinl.forumapirestful.dto.DataNewTopic;
+import co.kevinl.forumapirestful.dto.topic.DataEditTopic;
+import co.kevinl.forumapirestful.dto.topic.DataNewTopic;
 import co.kevinl.forumapirestful.model.CourseEntity;
 import co.kevinl.forumapirestful.model.TopicEntity;
 import co.kevinl.forumapirestful.model.UserEntity;
@@ -27,6 +27,7 @@ public class TopicService {
         this.courseRepository = courseRepository;
     }
 
+    //todo add throw
     public TopicEntity dtoToEntity(DataNewTopic dataNewTopic){
 
         Optional<UserEntity> userRepositoryById = userRepository.findById(dataNewTopic.id_user());

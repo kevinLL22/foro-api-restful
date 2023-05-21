@@ -1,7 +1,7 @@
 package co.kevinl.forumapirestful.service;
 
-import co.kevinl.forumapirestful.dto.DataEditCourse;
-import co.kevinl.forumapirestful.dto.DataNewCourse;
+import co.kevinl.forumapirestful.dto.course.DataEditCourse;
+import co.kevinl.forumapirestful.dto.course.DataNewCourse;
 import co.kevinl.forumapirestful.model.CourseEntity;
 import co.kevinl.forumapirestful.repository.CourseRepository;
 import org.springframework.stereotype.Service;

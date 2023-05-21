@@ -1,8 +1,8 @@
 package co.kevinl.forumapirestful.controller;
 
-import co.kevinl.forumapirestful.dto.DataEditTopic;
-import co.kevinl.forumapirestful.dto.DataNewTopic;
-import co.kevinl.forumapirestful.dto.DataTopicResponse;
+import co.kevinl.forumapirestful.dto.topic.DataEditTopic;
+import co.kevinl.forumapirestful.dto.topic.DataNewTopic;
+import co.kevinl.forumapirestful.dto.topic.DataTopicResponse;
 import co.kevinl.forumapirestful.model.TopicEntity;
 import co.kevinl.forumapirestful.service.TopicService;
 import jakarta.validation.Valid;

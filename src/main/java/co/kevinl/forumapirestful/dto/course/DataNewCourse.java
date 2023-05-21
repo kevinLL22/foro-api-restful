@@ -1,4 +1,4 @@
-package co.kevinl.forumapirestful.dto;
+package co.kevinl.forumapirestful.dto.course;
 
 import jakarta.validation.constraints.NotBlank;
 

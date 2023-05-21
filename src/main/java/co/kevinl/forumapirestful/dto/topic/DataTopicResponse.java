@@ -1,4 +1,4 @@
-package co.kevinl.forumapirestful.dto;
+package co.kevinl.forumapirestful.dto.topic;
 
 import co.kevinl.forumapirestful.model.TopicEntity;
 

@@ -1,7 +1,7 @@
 package co.kevinl.forumapirestful.controller;
 
-import co.kevinl.forumapirestful.dto.DataAuthenticateUser;
-import co.kevinl.forumapirestful.dto.DataReturnJwtToken;
+import co.kevinl.forumapirestful.dto.user.DataAuthenticateUser;
+import co.kevinl.forumapirestful.dto.user.DataReturnJwtToken;
 import co.kevinl.forumapirestful.model.UserEntity;
 import co.kevinl.forumapirestful.service.security.TokenService;
 import jakarta.validation.Valid;
@@ -27,7 +27,7 @@ public class AuthenticationController {
     }
 
     @PostMapping
-    public ResponseEntity authenticateUser(@RequestBody @Valid DataAuthenticateUser dataAuthenticateUser){
+    public ResponseEntity<DataReturnJwtToken> authenticateUser(@RequestBody @Valid DataAuthenticateUser dataAuthenticateUser){
 
         Authentication autToken = new UsernamePasswordAuthenticationToken(dataAuthenticateUser.email(),
                 dataAuthenticateUser.password());
