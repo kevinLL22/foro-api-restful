@@ -1,6 +1,7 @@
 package co.kevinl.forumapirestful.controller;
 
 import co.kevinl.forumapirestful.dto.answer.DataAnswerResponse;
+import co.kevinl.forumapirestful.dto.answer.DataEditAnswer;
 import co.kevinl.forumapirestful.dto.answer.DataNewAnswer;
 import co.kevinl.forumapirestful.model.AnswerEntity;
 import co.kevinl.forumapirestful.service.AnswerService;
@@ -50,5 +51,13 @@ public class AnswerController {
     public ResponseEntity<Void> deleteAnswerById(@PathVariable Long id){
         answerService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<DataAnswerResponse> editAnswer(@RequestBody DataEditAnswer dataEditAnswer){
+        AnswerEntity answerEntity = answerService.editAnswer(dataEditAnswer);
+        DataAnswerResponse dataAnswerResponse = new DataAnswerResponse(answerEntity);
+
+        return ResponseEntity.ok(dataAnswerResponse);
     }
 }

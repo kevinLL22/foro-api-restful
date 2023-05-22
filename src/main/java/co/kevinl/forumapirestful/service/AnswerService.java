@@ -1,5 +1,6 @@
 package co.kevinl.forumapirestful.service;
 
+import co.kevinl.forumapirestful.dto.answer.DataEditAnswer;
 import co.kevinl.forumapirestful.dto.answer.DataNewAnswer;
 import co.kevinl.forumapirestful.model.AnswerEntity;
 import co.kevinl.forumapirestful.model.TopicEntity;
@@ -45,7 +46,7 @@ public class AnswerService {
 
     public AnswerEntity findById(Long id){
         return answerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Course not found"));
+                .orElseThrow(() -> new RuntimeException("answer not found"));
     }
 
     public List<AnswerEntity> findAll(){
@@ -54,5 +55,13 @@ public class AnswerService {
 
     public void deleteById(Long id){
         answerRepository.deleteById(id);
+    }
+
+    public AnswerEntity editAnswer(DataEditAnswer editAnswer){
+        AnswerEntity answerEntity = answerRepository.findById(editAnswer.id())
+                .orElseThrow(() -> new RuntimeException("answer not found"));
+        answerEntity.setMessage(editAnswer.message());
+        answerRepository.save(answerEntity);
+        return answerEntity;
     }
 }
