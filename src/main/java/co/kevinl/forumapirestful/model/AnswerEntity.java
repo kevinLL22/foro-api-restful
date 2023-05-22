@@ -29,4 +29,8 @@ public class AnswerEntity {
     private Integer votes;
     private boolean solve;
 
+    public boolean isSolve(){
+        return solve;
+    }
+
 }
