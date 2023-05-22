@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/answer")
@@ -35,5 +36,13 @@ public class AnswerController {
         DataAnswerResponse dataAnswerResponse = new DataAnswerResponse(answerEntity);
 
         return ResponseEntity.ok(dataAnswerResponse);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<DataAnswerResponse>> findAllAnswer(){
+        List<AnswerEntity> answerEntities = answerService.findAll();
+        List<DataAnswerResponse> dataAnswerResponses = answerEntities.stream().map(DataAnswerResponse::new).toList();
+
+        return ResponseEntity.ok(dataAnswerResponses);
     }
 }

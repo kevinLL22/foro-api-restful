@@ -10,6 +10,7 @@ import co.kevinl.forumapirestful.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service
 public class AnswerService {
@@ -45,5 +46,9 @@ public class AnswerService {
     public AnswerEntity findById(Long id){
         return answerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Course not found"));
+    }
+
+    public List<AnswerEntity> findAll(){
+        return answerRepository.findAll();
     }
 }
