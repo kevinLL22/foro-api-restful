@@ -45,4 +45,10 @@ public class AnswerController {
 
         return ResponseEntity.ok(dataAnswerResponses);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAnswerById(@PathVariable Long id){
+        answerService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

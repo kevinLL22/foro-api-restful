@@ -51,4 +51,8 @@ public class AnswerService {
     public List<AnswerEntity> findAll(){
         return answerRepository.findAll();
     }
+
+    public void deleteById(Long id){
+        answerRepository.deleteById(id);
+    }
 }
