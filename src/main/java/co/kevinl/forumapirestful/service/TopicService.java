@@ -8,10 +8,11 @@ import co.kevinl.forumapirestful.model.UserEntity;
 import co.kevinl.forumapirestful.repository.CourseRepository;
 import co.kevinl.forumapirestful.repository.TopicRepository;
 import co.kevinl.forumapirestful.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,7 +29,7 @@ public class TopicService {
     }
 
     //todo add throw
-    public TopicEntity dtoToEntity(DataNewTopic dataNewTopic){
+    public TopicEntity saveNewTopic(DataNewTopic dataNewTopic){
 
         Optional<UserEntity> userRepositoryById = userRepository.findById(dataNewTopic.id_user());
         UserEntity userEntity = userRepositoryById.get();
@@ -58,8 +59,8 @@ public class TopicService {
         }
     }
 
-    public List<TopicEntity> returnAll(){
-        return topicRepository.findAll();
+    public Page<TopicEntity> returnAll(Pageable pageable){
+        return topicRepository.findAll(pageable);
     }
 
     public TopicEntity editTopic(DataEditTopic dataEditTopic){

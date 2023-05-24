@@ -8,10 +8,12 @@ import co.kevinl.forumapirestful.model.UserEntity;
 import co.kevinl.forumapirestful.repository.AnswerRepository;
 import co.kevinl.forumapirestful.repository.TopicRepository;
 import co.kevinl.forumapirestful.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.List;
+
 
 @Service
 public class AnswerService {
@@ -49,8 +51,8 @@ public class AnswerService {
                 .orElseThrow(() -> new RuntimeException("answer not found"));
     }
 
-    public List<AnswerEntity> findAll(){
-        return answerRepository.findAll();
+    public Page<AnswerEntity> findAll(Pageable pageable){
+        return answerRepository.findAll(pageable);
     }
 
     public void deleteById(Long id){

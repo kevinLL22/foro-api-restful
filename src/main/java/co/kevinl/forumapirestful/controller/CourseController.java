@@ -6,12 +6,13 @@ import co.kevinl.forumapirestful.dto.course.DataNewCourse;
 import co.kevinl.forumapirestful.model.CourseEntity;
 import co.kevinl.forumapirestful.service.CourseService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/course")
@@ -42,9 +43,8 @@ public class CourseController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DataCourseResponse>> getAllCourses(){
-        List<DataCourseResponse> responseList = courseService.findAll().stream().map(DataCourseResponse::new).toList();
-        return ResponseEntity.ok(responseList);
+    public Page<DataCourseResponse> getAllCourses(Pageable pageable){
+        return courseService.findAll(pageable).map(DataCourseResponse::new);
     }
 
     @DeleteMapping("/{id}")

@@ -6,13 +6,13 @@ import co.kevinl.forumapirestful.dto.answer.DataNewAnswer;
 import co.kevinl.forumapirestful.model.AnswerEntity;
 import co.kevinl.forumapirestful.service.AnswerService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
-
 @RestController
 @RequestMapping("/answer")
 public class AnswerController {
@@ -40,11 +40,9 @@ public class AnswerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DataAnswerResponse>> findAllAnswer(){
-        List<AnswerEntity> answerEntities = answerService.findAll();
-        List<DataAnswerResponse> dataAnswerResponses = answerEntities.stream().map(DataAnswerResponse::new).toList();
+    public Page<DataAnswerResponse> findAllAnswer(Pageable pageable){
+        return answerService.findAll(pageable).map(DataAnswerResponse::new);
 
-        return ResponseEntity.ok(dataAnswerResponses);
     }
 
     @DeleteMapping("/{id}")

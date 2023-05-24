@@ -4,10 +4,9 @@ import co.kevinl.forumapirestful.dto.course.DataEditCourse;
 import co.kevinl.forumapirestful.dto.course.DataNewCourse;
 import co.kevinl.forumapirestful.model.CourseEntity;
 import co.kevinl.forumapirestful.repository.CourseRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-
 
 @Service
 public class CourseService {
@@ -29,8 +28,8 @@ public class CourseService {
         return courseEntity;
     }
 
-    public List<CourseEntity> findAll(){
-        return courseRepository.findAll();
+    public Page<CourseEntity> findAll(Pageable pageable){
+        return courseRepository.findAll(pageable);
     }
 
     public CourseEntity findById(Long id){

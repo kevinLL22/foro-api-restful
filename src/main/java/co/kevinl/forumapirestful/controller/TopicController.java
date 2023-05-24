@@ -6,12 +6,13 @@ import co.kevinl.forumapirestful.dto.topic.DataTopicResponse;
 import co.kevinl.forumapirestful.model.TopicEntity;
 import co.kevinl.forumapirestful.service.TopicService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/topic")
@@ -26,7 +27,7 @@ public class TopicController {
     public ResponseEntity<DataTopicResponse> newTopic(@RequestBody @Valid DataNewTopic dataNewTopic,
                                    UriComponentsBuilder builder){
 
-        TopicEntity topicEntity = topicService.dtoToEntity(dataNewTopic);
+        TopicEntity topicEntity = topicService.saveNewTopic(dataNewTopic);
         DataTopicResponse dataTopicResponse = new DataTopicResponse(topicEntity);
 
         URI uri = builder.path("/topic/{id}").buildAndExpand(topicEntity.getId()).toUri();
@@ -42,8 +43,8 @@ public class TopicController {
 
     //todo add pageable
     @GetMapping
-    public List<DataTopicResponse> returnAllTopics(){
-        return topicService.returnAll().stream().map(DataTopicResponse::new).toList();
+    public Page<DataTopicResponse> returnAllTopics(Pageable pageable){
+        return topicService.returnAll(pageable).map(DataTopicResponse::new);
     }
 
     @PutMapping
@@ -54,7 +55,7 @@ public class TopicController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteTopic(@PathVariable Long id){
+    public ResponseEntity<Void> deleteTopic(@PathVariable Long id){
         topicService.deleteTopicById(id);
         return ResponseEntity.noContent().build();
     }
