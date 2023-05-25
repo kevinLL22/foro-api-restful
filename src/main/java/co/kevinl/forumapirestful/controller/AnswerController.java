@@ -5,6 +5,7 @@ import co.kevinl.forumapirestful.dto.answer.DataEditAnswer;
 import co.kevinl.forumapirestful.dto.answer.DataNewAnswer;
 import co.kevinl.forumapirestful.model.AnswerEntity;
 import co.kevinl.forumapirestful.service.AnswerService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 @RestController
 @RequestMapping("/answer")
+@SecurityRequirement(name = "bearer-key")
 public class AnswerController {
     final AnswerService answerService;
 

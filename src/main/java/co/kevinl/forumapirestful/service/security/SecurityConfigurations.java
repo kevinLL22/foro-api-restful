@@ -28,11 +28,13 @@ public class SecurityConfigurations {
 
         return security.csrf().disable()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)//type of session
-                .and().authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST,"/login").permitAll() //permit all in this http request
-                .anyRequest().authenticated() //otherwise any request has to be authenticated
-                .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)//type of session
+                .and()
+                .authorizeHttpRequests((req)->req
+                        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/login").permitAll()
+                        .anyRequest().authenticated())//otherwise any request has to be authenticated
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
     @Bean

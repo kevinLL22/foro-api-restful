@@ -5,6 +5,7 @@ import co.kevinl.forumapirestful.dto.course.DataEditCourse;
 import co.kevinl.forumapirestful.dto.course.DataNewCourse;
 import co.kevinl.forumapirestful.model.CourseEntity;
 import co.kevinl.forumapirestful.service.CourseService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/course")
+@SecurityRequirement(name = "bearer-key")
 public class CourseController {
     final CourseService courseService;
 

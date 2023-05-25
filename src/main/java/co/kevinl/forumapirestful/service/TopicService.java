@@ -31,11 +31,10 @@ public class TopicService {
     //todo add throw
     public TopicEntity saveNewTopic(DataNewTopic dataNewTopic){
 
-        Optional<UserEntity> userRepositoryById = userRepository.findById(dataNewTopic.id_user());
-        UserEntity userEntity = userRepositoryById.get();
-
-        Optional<CourseEntity> courseRepositoryById = courseRepository.findById(dataNewTopic.id_course());
-        CourseEntity courseEntity = courseRepositoryById.get();
+        UserEntity userEntity = userRepository.findById(dataNewTopic.id_user())
+                .orElseThrow();
+        CourseEntity courseEntity = courseRepository.findById(dataNewTopic.id_course())
+                .orElseThrow();
 
         TopicEntity entity = new TopicEntity();
         entity.setIdUser(userEntity);
