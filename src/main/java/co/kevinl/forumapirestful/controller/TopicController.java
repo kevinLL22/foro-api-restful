@@ -5,6 +5,7 @@ import co.kevinl.forumapirestful.dto.topic.DataNewTopic;
 import co.kevinl.forumapirestful.dto.topic.DataTopicResponse;
 import co.kevinl.forumapirestful.model.TopicEntity;
 import co.kevinl.forumapirestful.service.TopicService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/topic")
+@SecurityRequirement(name = "bearer-key")
 public class TopicController {
     final TopicService topicService;
 
@@ -41,7 +43,6 @@ public class TopicController {
         return ResponseEntity.ok(dataTopicResponse);
     }
 
-    //todo add pageable
     @GetMapping
     public Page<DataTopicResponse> returnAllTopics(Pageable pageable){
         return topicService.returnAll(pageable).map(DataTopicResponse::new);
