@@ -21,4 +21,8 @@ This project is the backend of technology forum follow MCV pattern design. The f
 - Auth0 (create and valid token)
 
 ## examples
-as a backend "insomnia" will be use to show the api being consume: 
+as a backend project "insomnia" will be use to show the api being consume: 
+https://github.com/kevinLL22/foro-api-restful/assets/111940100/01cf5281-5922-4a94-897e-6cf108fc19c1
+
+
+
