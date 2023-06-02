@@ -17,6 +17,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/topic")
+@CrossOrigin("http://localhost:4200/**")
 @SecurityRequirement(name = "bearer-key")
 public class TopicController {
     final TopicService topicService;

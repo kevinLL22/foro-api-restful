@@ -29,11 +29,12 @@ public class SecurityFilter extends OncePerRequestFilter {
         System.out.println("security filter start");
         //obtain token by request
         String authHeader = request.getHeader("Authorization");
+        System.out.println(authHeader);
         if (authHeader != null){
             System.out.println("token not null");
             var token = authHeader.replace("Bearer ","");
             String subject = tokenService.getSubject(token);
-
+            System.out.println(token);
             if (subject != null){
                 System.out.println("subject from token not null");
                 UserDetails user = userRepository.findByEmail(subject);
