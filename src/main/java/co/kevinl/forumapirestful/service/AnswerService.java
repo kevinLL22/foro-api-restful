@@ -8,6 +8,7 @@ import co.kevinl.forumapirestful.model.UserEntity;
 import co.kevinl.forumapirestful.repository.AnswerRepository;
 import co.kevinl.forumapirestful.repository.TopicRepository;
 import co.kevinl.forumapirestful.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,9 @@ public class AnswerService {
         this.topicRepository = topicRepository;
     }
 
-    public AnswerEntity saveNewAnswer(DataNewAnswer dataNewAnswer){
-        UserEntity userEntity = userRepository.findById(dataNewAnswer.id_user()).orElseThrow(() -> new RuntimeException("Course not found"));
+    public AnswerEntity saveNewAnswer(DataNewAnswer dataNewAnswer, HttpServletRequest request){
+        UserEntity userEntity = userRepository.findById(Long.valueOf( request.getAttribute("idUser").toString() ))
+                .orElseThrow(() -> new RuntimeException("Course not found"));
         TopicEntity topicEntity = topicRepository.findById(dataNewAnswer.id_topic()).orElseThrow(() -> new RuntimeException("Course not found"));
         AnswerEntity answerEntity = new AnswerEntity();
 

@@ -6,6 +6,7 @@ import co.kevinl.forumapirestful.dto.answer.DataNewAnswer;
 import co.kevinl.forumapirestful.model.AnswerEntity;
 import co.kevinl.forumapirestful.service.AnswerService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,8 +27,8 @@ public class AnswerController {
 
     @PostMapping
     public ResponseEntity<DataAnswerResponse> newAnswer(@RequestBody @Valid DataNewAnswer dataNewAnswer,
-                                    UriComponentsBuilder builder){
-        AnswerEntity answerEntity = answerService.saveNewAnswer(dataNewAnswer);
+                                    UriComponentsBuilder builder, HttpServletRequest request){
+        AnswerEntity answerEntity = answerService.saveNewAnswer(dataNewAnswer, request);
         DataAnswerResponse dataAnswerResponse = new DataAnswerResponse(answerEntity);
         URI uri = builder.path("/answer/{id}").buildAndExpand(answerEntity.getId()).toUri();
         return ResponseEntity.created(uri).body(dataAnswerResponse);

@@ -6,6 +6,7 @@ import co.kevinl.forumapirestful.dto.topic.DataTopicResponse;
 import co.kevinl.forumapirestful.model.TopicEntity;
 import co.kevinl.forumapirestful.service.TopicService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,9 +29,9 @@ public class TopicController {
 
     @PostMapping
     public ResponseEntity<DataTopicResponse> newTopic(@RequestBody @Valid DataNewTopic dataNewTopic,
-                                   UriComponentsBuilder builder){
+                                                      UriComponentsBuilder builder, HttpServletRequest request){
 
-        TopicEntity topicEntity = topicService.saveNewTopic(dataNewTopic);
+        TopicEntity topicEntity = topicService.saveNewTopic(dataNewTopic, request);
         DataTopicResponse dataTopicResponse = new DataTopicResponse(topicEntity);
 
         URI uri = builder.path("/topic/{id}").buildAndExpand(topicEntity.getId()).toUri();

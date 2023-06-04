@@ -8,6 +8,7 @@ import co.kevinl.forumapirestful.model.UserEntity;
 import co.kevinl.forumapirestful.repository.CourseRepository;
 import co.kevinl.forumapirestful.repository.TopicRepository;
 import co.kevinl.forumapirestful.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,9 +30,10 @@ public class TopicService {
     }
 
     //todo add throw
-    public TopicEntity saveNewTopic(DataNewTopic dataNewTopic){
+    public TopicEntity saveNewTopic(DataNewTopic dataNewTopic, HttpServletRequest request){
 
-        UserEntity userEntity = userRepository.findById(dataNewTopic.id_user())
+                                //getting id user and casting to Long
+        UserEntity userEntity = userRepository.findById(Long.valueOf( request.getAttribute("idUser").toString() ))
                 .orElseThrow();
         CourseEntity courseEntity = courseRepository.findById(dataNewTopic.id_course())
                 .orElseThrow();
