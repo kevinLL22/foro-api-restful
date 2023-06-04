@@ -32,21 +32,19 @@ public class TokenService {
         }
     }
 
-    public String getSubject(String token) {
+    public String[] getSubject(String token) {
         System.out.println("start method get subject");
         if (token==null){
             throw new RuntimeException();
         }
         DecodedJWT verifier = null;
         try {
-            System.out.println("start try from getsubject");
             Algorithm algorithm = Algorithm.HMAC256(apiSecret);
             verifier = JWT.require(algorithm)
                     .withIssuer("forum api")
                     .build()
                     .verify(token);
-            verifier.getSubject();
-            System.out.println("end try getsubject");
+            System.out.println("extrayendo id desde token service, el id es:"+verifier.getClaim("id"));
         } catch (JWTVerificationException exception) {
             System.out.println(exception.getMessage());
             System.out.println("catch from creating verifier");
@@ -54,7 +52,7 @@ public class TokenService {
         if (verifier.getSubject() == null) {
             throw new RuntimeException("invalid verifier");
         }
-        return verifier.getSubject();
+        return new String[]{verifier.getSubject(), String.valueOf(verifier.getClaim("id"))};
 
     }
 
